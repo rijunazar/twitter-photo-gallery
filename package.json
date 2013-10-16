@@ -1,0 +1,7 @@
+{
+  "name": "twitter image gallery",
+  "description": "gallery of users photos using twitter entities api and Angular JS",
+  "devDependencies": {
+    "node-static": *    
+  }
+}
