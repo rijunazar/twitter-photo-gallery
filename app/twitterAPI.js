@@ -1,18 +1,16 @@
 'use strict';
 
-var util = require('util'),
+var utils = require('./utils'),
     OAuth = require('oauth').OAuth,
     config = require('./config/api.json');
 
 function getURI(resource, params) {
     var host = config.host,
         version = config.version,
-        resources = config.resources;
+        resources = config.resources,
+        url;
 
-    params = params || [];
-    params.unshift(resources[resource]);
-
-    return host + version + util.format.apply(util, params);
+    return host + version + utils.formatURL(resources[resource], params);
 }
 
 function createOAuth(callbackUrl) {
@@ -28,13 +26,6 @@ function createOAuth(callbackUrl) {
         callbackUrl ? callbackUrl : null,
         'HMAC-SHA1'
     );
-
-
-    return {
-        getRequestToken: oa.getOAuthRequestToken.bind(oa),
-        getAccessToken: oa.getOAuthAccessToken.bind(oa, this.accessToken, this.accessSecret),
-        getResource: oa.getProtectedResource.bind(oa, resourceUrl, this.accessToken, this.accessSecret)
-    };
 }
 
 
@@ -49,13 +40,13 @@ function TwitterAPI(config) {
 }
 
 TwitterAPI.prototype = {
-     getRequestToken: function (callbackUrl, callback) {
+    getRequestToken: function (callbackUrl, callback) {
         var oThis = this,
             oa = createOAuth(callbackUrl);
 
         oa.getOAuthRequestToken(function (e, token, secret) {
             if (!e) {
-                oThis._setAuthToken(token, secret)
+                oThis._setAuthToken(token, secret);
             }
             callback.apply(null, arguments);
         });
@@ -85,12 +76,14 @@ TwitterAPI.prototype = {
             });
     },
 
-    getFriendsList: function (callback) {
-        this._getResource('friends', callback);
+    getFriendsList: function (cursor, callback) {
+        this._getResource('friends', {
+            cursor: cursor   
+        }, callback);
     },
 
     getProfile: function (callback) {
-        this._getResource('profile', [this.user.id, this.user.name], callback);
+        this._getResource('profile', this.user, callback);
     },
 
     getGallery: function (callback) {
@@ -104,11 +97,11 @@ TwitterAPI.prototype = {
 
         if (typeof params === "function") {
             callback = params;
-            params = [];
+            params = {};
         }
 
         url = getURI(name, params);
-
+        console.log(url);
         oa.getProtectedResource(url, "GET", this.accessToken, this.accessSecret, callback);
     },
 
