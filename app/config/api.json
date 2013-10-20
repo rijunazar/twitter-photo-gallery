@@ -1,7 +1,11 @@
 {
-    "host": "api.twitter.com",
-    "path": "/oauth2/token",
+    "host": "https://api.twitter.com/",
+    "version": 1.1,
     "consumerKey": "0g8qA079EKheeBYQHsfRfg",
     "consumerSecret": "9WCj4VTKXyTBN9Q25EbxLLlTjXpf7ztcPDfx3ReOY7M",
-    "grantType": "client_credentials"
+    "requestTokenURL": "https://api.twitter.com/oauth/request_token",
+    "accessTokenURL":  "https://api.twitter.com/oauth/access_token",
+    "resources": {
+        "profile": "/users/show.json?user_id=%s&screen_name=%s"
+    }
 }
