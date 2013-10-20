@@ -57,6 +57,7 @@
     "browser"       : true,     // Standard browser globals e.g. `window`, `document`.
     "devel"         : false,    // Allow development statements e.g. `console.log();`.
     "jquery"        : true,    // Enable globals exposed by jQuery JavaScript library.
+    "node"          : true,
 
     // == JSLint Legacy ===================================================
     //
