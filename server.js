@@ -1,11 +1,11 @@
 'use strict';
 var express = require('express'),
-    apiController = require('./apiController.js'),
+    apiController = require('./app/apiController.js'),
     port = 8080;
 
 var app = express();
 
-app.use('/', express.static('../public'));
+app.use('/', express.static('./public'));
 app.use(express.bodyParser());
 app.use(express.cookieParser());
 app.use(express.session({
