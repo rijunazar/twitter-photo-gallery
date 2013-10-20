@@ -6,6 +6,8 @@
     "requestTokenURL": "https://api.twitter.com/oauth/request_token",
     "accessTokenURL":  "https://api.twitter.com/oauth/access_token",
     "resources": {
-        "profile": "/users/show.json?user_id=%s&screen_name=%s"
+        "profile": "/users/show.json?user_id=$id&screen_name=$name",
+        "friends": "/friends/list.json?count=200&skip_status=true&cursor=$cursor",
+        "tweets": "/statuses/user_timeline.json?count=200&trim_user=1&include_rts=false&screen_name=$name&id=$id"
     }
 }
