@@ -45,10 +45,13 @@ TwitterAPI.prototype = {
             oa = createOAuth(callbackUrl);
 
         oa.getOAuthRequestToken(function (e, token, secret) {
+            var endPoint;
+
             if (!e) {
+                endPoint =  utils.formatURL(config.authEndPoint, { token: token });
                 oThis._setAuthToken(token, secret);
             }
-            callback.apply(null, arguments);
+            callback(e, token, secret, endPoint);
         });
     },
 
@@ -78,7 +81,7 @@ TwitterAPI.prototype = {
 
     getFriendsList: function (cursor, callback) {
         this._getResource('friends', {
-            cursor: cursor   
+            cursor: cursor
         }, callback);
     },
 
@@ -86,8 +89,20 @@ TwitterAPI.prototype = {
         this._getResource('profile', this.user, callback);
     },
 
-    getGallery: function (callback) {
-        this._getResource('images', callback);
+    getTweets: function (config, callback) {
+        this._getResource('tweets', config, function (err, tweets, respObj) {
+            if (!err && config.hasMedia) {
+                try {
+                    tweets = JSON.parse(tweets);
+                    tweets = tweets.filter(function (item) {
+                        return Array.isArray(item.entities.media);
+                    });
+                } catch (e) {
+                    console.log('unable to parse response, returning full result');
+                }
+            }
+            callback.call(null, err, tweets, respObj);
+        });
     },
 
     _getResource: function (name, params, callback) {
@@ -101,7 +116,7 @@ TwitterAPI.prototype = {
         }
 
         url = getURI(name, params);
-        console.log(url);
+        console.log('requesting resource %s', url);
         oa.getProtectedResource(url, "GET", this.accessToken, this.accessSecret, callback);
     },
 
@@ -115,7 +130,5 @@ TwitterAPI.prototype = {
         this.user.name = name;
     }
 };
-
-
 
 module.exports = exports = TwitterAPI;

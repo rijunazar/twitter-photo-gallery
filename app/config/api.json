@@ -5,6 +5,7 @@
     "consumerSecret": "9WCj4VTKXyTBN9Q25EbxLLlTjXpf7ztcPDfx3ReOY7M",
     "requestTokenURL": "https://api.twitter.com/oauth/request_token",
     "accessTokenURL":  "https://api.twitter.com/oauth/access_token",
+    "authEndPoint": "https://api.twitter.com/oauth/authorize?oauth_token=$token",
     "resources": {
         "profile": "/users/show.json?user_id=$id&screen_name=$name",
         "friends": "/friends/list.json?count=200&skip_status=true&cursor=$cursor",

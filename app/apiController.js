@@ -4,13 +4,18 @@ var express = require('express'),
     qs = require('querystring'),
     twitterAPI = require('./twitterAPI');
 
-function validateSession(req, resp) {
+/* middleware for validating session */
+function validateSession(req, resp, next) {
     var apiObj = req.session.apiObj = new twitterAPI(req.session.apiObj);
 
-    if (!apiObj.hasValidToken()) {
-        resp.redirect('/api/authenticate/?ref=' + qs.escape(req.url));
+    if (apiObj.hasValidToken()) {
+        next();
+    } else {
+        resp.redirect('/api/authenticate/?ref=' + qs.escape(req.originalUrl));
     }
 }
+
+/* controller class */
 
 function Controller() {
     this._app = null;
@@ -20,12 +25,13 @@ function Controller() {
 Controller.prototype = {
     bindRoutes: function () {
         var app = this._app;
-        app.get('/friends/:id', this.getFriends);
+        app.get('/friends/:id', validateSession, this.getFriends);
+        app.get('/friends', validateSession, this.getFriends);
         app.get('/authenticate', this.authenticate);
-        app.get('/profile', this.getProfile);
+        app.get('/profile', validateSession, this.getProfile);
         app.get('/session', this.startSession);
-        app.get('/friends/:id/gallery', this.getGallery);
-        app.get('/gallery', this.getGallery);
+        app.get('/friends/:id/tweets', validateSession, this.getTweets);
+        app.get('/tweets', validateSession, this.getTweets);
     },
 
     init: function () {
@@ -36,21 +42,25 @@ Controller.prototype = {
 
     getProfile: function (req, resp) {
 
-        validateSession.apply(this, arguments);
         var apiObj = req.session.apiObj;
 
         apiObj.getProfile(function (e, data, apiResp) {
             resp.set(apiResp.headers);
-            resp.send(apiResp.statusCode, data)
+            resp.send(apiResp.statusCode, data);
         });
     },
 
     getFriends: function (req, resp) {
-        validateSession.apply(this, arguments);
+        var apiObj = req.session.apiObj;
+
+        apiObj.getFriendsList(req.query.cursor || -1, function (e, data, apiResp) {
+            resp.set(apiResp.headers);
+            resp.send(apiResp.statusCode, data);
+        });
     },
 
     authenticate: function (req, resp) {
-        var refUrl = req.param('ref'),
+        var refUrl = req.query.ref,
             cbUrl = req.protocol + "://" + req.get('host') + '/api/session/',
             apiObj;
 
@@ -59,24 +69,36 @@ Controller.prototype = {
             cbUrl += "?r=" + qs.escape(refUrl);
         }
 
-        apiObj.getRequestToken(cbUrl, function (error, token, secret) {
-            resp.redirect('https://api.twitter.com/oauth/authorize?oauth_token=' + token);
+        apiObj.getRequestToken(cbUrl, function (error, token, secret, endpoint) {
+            resp.redirect(endpoint);
         });
     },
 
     startSession: function (req, resp) {
         var apiObj = req.session.apiObj = new twitterAPI(req.session.apiObj),
-            verifier = req.query.oauth_verifier;
-
-        console.log(apiObj);
+            verifier = req.query.oauth_verifier,
+            redirectURL = req.query.r || '/api/profile';
 
         apiObj.fetchAccessToken(verifier, function (e, token, secret, params) {
-            resp.redirect('/api/profile');
+            resp.redirect(redirectURL);
         });
     },
 
-    getGallery: function (req, resp) {
-        validateSession.apply(this, arguments);
+    getTweets: function (req, resp) {
+        var apiObj = req.session.apiObj,
+            id = req.param('id'),
+            hasMedia = (req.query.hasMedia === 'true'),
+            config;
+
+        config = {
+            id: id,
+            hasMedia: hasMedia
+        };
+
+        apiObj.getTweets(config, function (e, data, apiResp) {
+            resp.set(apiResp.headers);
+            resp.send(apiResp.statusCode, data);
+        });
     }
 };
 
