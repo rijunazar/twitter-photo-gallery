@@ -3,6 +3,7 @@
   "description": "gallery of users photos using twitter entities api and Angular JS",
   "version": "0.0.1",
   "devDependencies": {
-    "node-static": "x"
+    "oauth": "x",
+    "express": "3.x"
   }
 }
