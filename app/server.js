@@ -1,13 +1,19 @@
-var static = require('node-static');
-var http = require('http');
-var port = 8080;
+'use strict';
+var express = require('express'),
+    apiController = require('./apiController.js'),
+    port = 8080;
 
-var fileServer = new static.Server('../app');
+var app = express();
 
-http.createServer(function (request, response) {
-    request.addListener('end', function () {
-        fileServer.serve(request, response);
-    }).resume();
-}).listen(port);
+app.use('/', express.static('../public'));
+app.use(express.bodyParser());
+app.use(express.cookieParser());
+app.use(express.session({
+    secret: 'twitterphotoapp'
+}));
+var api = new apiController();
+app.use('/api', api.init());
+
+app.listen(port);
 
 console.log("static server listening to port ", port);
