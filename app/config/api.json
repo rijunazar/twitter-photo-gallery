@@ -1,0 +1,7 @@
+{
+    "host": "api.twitter.com",
+    "path": "/oauth2/token",
+    "consumerKey": "0g8qA079EKheeBYQHsfRfg",
+    "consumerSecret": "9WCj4VTKXyTBN9Q25EbxLLlTjXpf7ztcPDfx3ReOY7M",
+    "grantType": "client_credentials"
+}
