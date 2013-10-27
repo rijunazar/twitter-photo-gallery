@@ -1,0 +1,434 @@
+/*fonts*/
+
+@font-face {
+    font-family: 'League Gothic';
+    src: url('../fonts/League_Gothic-webfont.eot');
+    src: url('../fonts/League_Gothic-webfont.eot?#iefix') format('embedded-opentype'),
+        url('../fonts/League_Gothic-webfont.woff') format('woff'),
+        url('../fonts/League_Gothic-webfont.ttf') format('truetype'),
+        url('../fonts/League_Gothic-webfont.svg#LeagueGothicRegular') format('svg');
+    font-weight: normal;
+    font-style: normal;
+}
+
+/* Entypo Icon Font */
+@font-face {
+  font-family: 'entypo-selected';
+  src: url("../fonts/entypo-selected.eot");
+  src: 
+      url("../fonts/entypo-selected.eot?#iefix") format('embedded-opentype'), 
+      url("../fonts/entypo-selected.woff") format('woff'), 
+      url("../fonts/entypo-selected.ttf") format('truetype'), 
+      url("../fonts/entypo-selected.svg#entypo-selected") format('svg');
+  font-weight: normal;
+  font-style: normal;
+}
+
+/*Common*/
+
+.main-container {
+    position: absolute;
+    top:0;
+    left:0;
+    right:0;
+    bottom:0;
+    line-height: 1.618;
+    color: #33393f;
+}
+
+nav.main-navigation {
+    position: fixed;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 40px;
+    padding-top: 5px;
+    background-color: #0099cc;
+    box-shadow: 0 3px 10px rgba(0, 0, 0, 0.3);
+    z-index: 999;
+}
+
+nav.main-navigation,
+nav.main-navigation a {
+    color: #fff;
+    font-size: 15px;
+    transition-property: all;
+    transition-property: none;
+    transition-property: background-color;
+    transition-duration: 400ms;
+    transition-timing-function: ease-out;
+}
+
+nav.main-navigation a {
+    font-weight: bold;
+    padding: 6px 10px 8px;
+    line-height: 30px;
+    margin-right: 5px;
+    border-radius: 3px;
+}
+
+nav.main-navigation a:hover,
+nav.main-navigation a.active {
+    background-color: rgba(28, 90, 111, 0.5);
+    text-decoration: none;
+}
+
+nav .logo {
+    font-family: "League Gothic", helvetica;
+    font-size: 25px;
+    line-height: 25px;
+    padding: 5px 5px 0 20px;
+    font-weight: bold;
+    letter-spacing: 2px;
+    text-shadow: 0 1px 1px rgba(94, 9, 151, 0.38);
+}
+
+.friendsList-container,
+.gallery-container {
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+    overflow-y: auto;
+    position: absolute;
+    top:0;
+    bottom: 0;
+}
+
+.friendsList-container {
+    margin-top: 45px;
+    padding: 10px 0 0;
+    width: 325px;
+    background: rgba(0, 0, 0, 0.07);
+    border-right: 1px solid #ddd;
+}
+
+.friendsList-container form{
+    padding: 0 25px 10px;
+}
+
+.friends-list {
+    border-top: 1px solid #fff;
+    border-bottom: 1px solid #ddd;
+}
+
+.friends-list .media {
+    border-bottom: 1px solid #fff;
+    border-top: 1px solid #ddd;
+    margin-top: 0;
+    padding-top: 3px;
+}
+
+.friends-list .desc {
+    font-size: 11px;
+    line-height: 1.2;
+}
+
+.friends-list .media-heading {
+    margin:0;
+}
+
+.friends-list .media-object {
+    margin-top: 6px;
+}
+
+.gallery-container {
+    left: 325px;
+    border-left: 1px solid #eee;
+    right: 0;
+    margin-top: 45px;
+}
+
+.profile{
+    padding: 10px 20px;
+    background: rgba(0, 0, 0, 0.07);
+    border-bottom: 1px solid #ddd;
+}
+
+.profile .media-body {
+    padding-top: 12px;
+}
+
+
+/* gallery */
+
+.gamma-container,
+.gamma-gallery,
+.gamma-gallery li {
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+}
+
+.gamma-container {
+    min-height: 200px;
+    padding: 10px;
+}
+
+.gamma-gallery {
+    width: 100%;
+    position: relative;
+}
+
+.gamma-gallery li {
+    display: block;
+    position: relative;
+    cursor: pointer;
+    float: left;
+    padding: 4px;
+}
+
+.gamma-gallery li img {
+    max-width: 100%;
+    width: auto;
+    height: auto;
+    display: block;
+}
+
+.gamma-description {
+    background: #fff;
+    background: rgba(255, 255, 255, 0.6);
+    position: absolute;
+    top: 20px;
+    left: 20px;
+    bottom: 20px;
+    right: 20px;
+    text-align: center;
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=0)";
+    filter: alpha(opacity=0);
+    opacity: 0;
+    -webkit-transition: opacity 0.4s ease-in-out;
+    -moz-transition: opacity 0.4s ease-in-out;
+    -ms-transition: opacity 0.4s ease-in-out;
+    -o-transition: opacity 0.4s ease-in-out;
+    transition: opacity 0.4s ease-in-out;
+}
+
+.no-touch .gamma-gallery li:hover .gamma-description {
+    -ms-filter:"progid:DXImageTransform.Microsoft.Alpha(Opacity=80)";
+    filter: alpha(opacity=80);
+    opacity: 1;
+}
+ 
+.gamma-description:before {
+    content: '';
+    height: 100%;
+}
+
+.gamma-description:before,
+.gamma-description h3 {
+    display: inline-block;
+    vertical-align: middle;
+}
+
+.gamma-description h3 {
+    width: 100%;
+    padding: 0 20px;
+    font-weight: 400;
+    text-transform: uppercase;
+    font-size: 16px;
+    letter-spacing: 2px;
+}
+
+.gamma-buttons {
+    position: absolute;
+    top: 10px;
+    right: 10px;
+    z-index: 10001;
+}
+
+.gamma-buttons button {
+    float: left;
+    background: #333;
+    color: #fff;
+    display: block;
+    width: 30px;
+    height: 30px;
+    font-size: 14px;
+    margin-left: 5px;
+    cursor: pointer;
+    border: none;
+    outline: none;
+}
+
+.gamma-buttons button:before,
+.gamma-nav span:before {
+    font-family: 'entypo-selected';
+    font-style: normal;
+    font-weight: normal;
+    speak: none;
+    display: block;
+    text-align: center;
+    opacity: 0.7;
+    outline: none;
+}
+
+.no-touch .gamma-buttons button:hover {
+    background: #666;
+}
+
+button.gamma-btn-close:before {
+    content: '\2715';
+}
+
+button.gamma-btn-ssplay:before {
+    content: '\25b6';
+}
+
+button.gamma-btn-sspause:before {
+    content: '\2389';
+}
+
+.gamma-single-view ,
+.gamma-overlay {
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    display: none;
+    position: fixed;
+    z-index: 10000;
+}
+
+.gamma-single-view {
+    text-align: center;
+}
+
+.gamma-overlay {
+    background: #000;
+    opacity: 0;
+    z-index: 9999;
+}
+
+.gamma-single-view img {
+    position: absolute;
+    cursor: pointer;
+}
+
+.gamma-description-wrapper {
+    background: rgba(0,0,0,0.7);
+    position: absolute;
+    bottom: 0px;
+    left: 0px;
+    right: 0px;
+    z-index: 10;
+    padding: 5px 0;
+}
+
+.gamma-single-view .gamma-description {
+    background: transparent;
+    position: relative;
+    bottom: auto;
+    left: auto;
+    right: auto;
+    top: auto;
+}
+
+.gamma-single-view .gamma-description h3 {
+    font-size: 15px;
+    padding: 5px 0;
+    color: #fff;
+}
+
+.gamma-nav span {
+    position: absolute;
+    display: block;
+    width: 20px;
+    height: 38px;
+    top: 50%;
+    margin-top: -19px;
+    left: 20px;
+    cursor: pointer;
+    text-align: center;
+    -webkit-transition: all 0.3s ease;
+    -moz-transition: all 0.3s ease;
+    -ms-transition: all 0.3s ease;
+    -o-transition: all 0.3s ease;
+    transition: all 0.3s ease;
+}
+
+.gamma-nav span.gamma-next {
+    left: auto;
+    right: 20px;
+}
+
+.gamma-nav span:before {
+    color: #fff;
+    opacity: 0.7;
+    font-size: 40px;
+}
+
+.gamma-nav span:hover:before {
+    opacity: 1;
+}
+
+.gamma-nav span:before {
+    display: block;
+    margin: 0;
+    width: auto;
+}
+
+.gamma-nav span.gamma-prev:before {
+    content: '\e75d';
+}
+
+.gamma-nav span.gamma-next:before {
+    content: '\e75e';
+}
+
+.gamma-img-fly {
+    position: absolute;
+    top: 0;
+    left: 0;
+    z-index: 99999;
+}
+
+/* Loaders */
+
+.gamma-loading {
+    background: transparent url(../img/loader_light.gif) no-repeat center center;
+}
+
+.gamma-single-view.gamma-loading {
+    background: transparent url(../img/loader_dark.gif) no-repeat center center;
+}
+
+
+/* Make some things unselectable. Remove where selection is needed: */
+
+.gamma-container img,
+.gamma-nav span,
+.gamma-buttons button,
+.gamma-description-wrapper,
+.gamma-description,
+.gamma-description h3 {
+    -webkit-touch-callout: none;
+    -webkit-user-select: none;
+    -khtml-user-select: none;
+    -moz-user-select: none;
+    -ms-user-select: none;
+    user-select: none;
+}
+
+@media screen and (max-width: 750px) {
+
+    .gamma-description {
+        top: 10px;
+        left: 10px;
+        bottom: 10px;
+        right: 10px;
+    }
+
+    .gamma-description h3 {
+        font-size: 14px;
+        padding: 0 5px;
+    }
+
+}
+
+@media screen and (max-width: 500px) {
+
+    .gamma-buttons {
+        float: left;
+        clear: both;
+    }
+
+}
+
