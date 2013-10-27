@@ -2,8 +2,16 @@
   "name": "twitter_image_gallery",
   "description": "gallery of users photos using twitter entities api and Angular JS",
   "version": "0.0.1",
-  "devDependencies": {
+  "dependencies": {
     "oauth": "x",
     "express": "3.x"
+  },
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/rijunazar/twitter-photo-gallery.git"
   }
 }
