@@ -1,12 +1,98 @@
 <!doctype html>
-<html lang="en" ng-app>
+<html lang="en" ng-app="twitterGalleryApp">
   <head>
     <meta charset="utf-8">
-    <title>My HTML File</title>
+    <title>Twitter Image Gallery</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <!-- Bootstrap -->
+    <link href="css/bootstrap.min.css" rel="stylesheet" media="screen">
     <link rel="stylesheet" href="css/main.css">
-    <script src="lib/angular/angular.js"></script>
+    <script type="text/javascript" src="lib/angular/angular.min.js"></script>
+    <script type="text/javascript" src="js/controller.js"></script>
+    <script type="text/javascript" src="js/app.js"></script>
   </head>
   <body>
-    <p>{{'Hello ' + 'world'}}</p>
+    <div class="main-container">
+      <header class="row-fluid">
+        <nav class="main-navigation">
+          <div class="logo span2">Twitter Gallery</div>
+          <ul class="unstyled span9">
+            <li>
+              <a href="#" class="active">Home</a>
+              <a href="#">Friends</a>
+              <a href="#">About</a>
+            </li>
+          </ul>
+          <div class="row1">
+            <button class="btn">Login</button>
+          </div>
+        </nav>
+      </header>
+      <div class="content-fluid">
+        <section class="friendsList-container" ng-controller="friendsList">
+          <ng-include src="templateURL"></ng-include>
+        </section>
+        <section class="gallery-container">
+          <article class="profile">
+            <div class="media" ng-controller="user">
+              <a class="pull-left" href="#">
+                <img class="media-object img-circle" width="73px" ng-src="{{user.profile_image_url}}" />
+              </a>
+              <div class="media-body">
+                <h4 class="media-heading">{{user.name}} <a href="#">{{user.screen_name}}</a></h4>
+                <p>{{user.description}}</p>
+              </div>
+            </div>
+          </article>
+          <section class="gallery gamma-container gamma-loading" id="gamma-container">
+          
+          <!-- gallery begins -->
+          
+          <ul class="gamma-gallery unstyled clearfix">
+
+           
+          </ul>
+          
+          
+          
+          <div class="gamma-overlay"></div>
+          
+          
+          <!-- gallery ends-->
+          
+          
+          
+          </section>
+        </section>
+      </div>
+      <footer></footer>
+    </div>
+    <script type="text/javascript" src="lib/modernizr.custom.js"></script>
+    <script type="text/javascript" src="lib/jquery-1.8.2.min.js"></script>
+    <script type="text/javascript" src="lib/jquery.masonry.min.js"></script>
+    <script type="text/javascript"  src="lib/gamma.js"></script>
+    <script type="text/javascript">
+      $(function() {
+
+        var gammaSettings = {
+            viewport : [{
+              width : 900,
+              columns : 5
+            }, {
+              width : 500,
+              columns : 3
+            }, { 
+              width : 320,
+              columns : 2
+            }, { 
+              width : 0,
+              columns : 1
+            }]
+        };
+        
+        //Gamma.container = $('#gallery');
+        Gamma.init(gammaSettings);
+      });
+    </script>
   </body>
 </html>
