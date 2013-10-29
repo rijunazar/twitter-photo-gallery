@@ -2,14 +2,15 @@
   <input type="text" placeholder="Search friends..." class="span3" />
 </form>
 <ul class="unstyled friends-list">
-  <li class="media">
-    <a class="pull-left" href="#">
-      <img src="http://pbs.twimg.com/profile_images/378800000422625578/aa4926528b3a1297ae2d9f5738d537a4_normal.jpeg" class="media-object">
-    </a>
-    <div class="media-body">
-      <a href="#"><h5 class="media-heading">BrendanEich</h5></a>
-      <p class="desc">Brendan Eich invented JavaScript, co-founded <a href="http://t.co/4ZHStxqTQB">brendaneich.com</a>, and serves as CTO and SVP Engineering, Mozilla.</p>
-    </div>
-  <li>
+<li class="media" ng-repeat="friend in friends | filter:query">
+  <a class="pull-left" href="#/friends/{{friend.id}}">
+    <img width="48px" ng-src="{{friend.profile_image_url}}" class="media-object" />
+  </a>
+  <div class="media-body">
+    <a href="#/friends/{{friend.id}}"><h5 class="media-heading">{{friend.name}}</h5></a>
+    <p class="desc">{{friend.description}}</p>
+  </div>
+<li>
 </ul>
+<div class="gamma-loading" ng-show="isLoading"></div>
 
