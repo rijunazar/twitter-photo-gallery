@@ -2,7 +2,8 @@
 
 var express = require('express'),
     qs = require('querystring'),
-    twitterAPI = require('./twitterAPI');
+    twitterAPI = require('./twitterAPI'),
+    maxAge = 60 * 10;
 
 /* middleware for validating session */
 function validateSession(req, resp, next) {
@@ -10,7 +11,9 @@ function validateSession(req, resp, next) {
 
     if (apiObj.hasValidToken()) {
         next();
-    } else {
+    } else if (req.xhr) {
+        resp.send(401, {message: "Unauthorized access"});
+    } else { //todo: for testing api, remove in prod
         resp.redirect('/api/authenticate/?ref=' + qs.escape(req.originalUrl));
     }
 }
@@ -54,7 +57,9 @@ Controller.prototype = {
         var apiObj = req.session.apiObj;
 
         apiObj.getFriendsList(req.query.cursor || -1, function (e, data, apiResp) {
-            resp.set(apiResp.headers);
+            //resp.set(apiResp.headers);
+            resp.type(apiResp.headers['content-type']);
+            resp.setHeader('Cache-Control', 'public, max-age=' + maxAge);
             resp.send(apiResp.statusCode, data);
         });
     },
