@@ -23,48 +23,12 @@
               <a href="#">About</a>
             </li>
           </ul>
-          <div class="row1">
+          <!--<div class="row1">
             <button class="btn">Login</button>
-          </div>
+          </div>-->
         </nav>
       </header>
-      <div class="content-fluid">
-        <section class="friendsList-container" ng-controller="friendsList">
-          <ng-include src="templateURL"></ng-include>
-        </section>
-        <section class="gallery-container">
-          <article class="profile">
-            <div class="media" ng-controller="user">
-              <a class="pull-left" href="#">
-                <img class="media-object img-circle" width="73px" ng-src="{{user.profile_image_url}}" />
-              </a>
-              <div class="media-body">
-                <h4 class="media-heading">{{user.name}} <a href="#">{{user.screen_name}}</a></h4>
-                <p>{{user.description}}</p>
-              </div>
-            </div>
-          </article>
-          <section class="gallery gamma-container gamma-loading" id="gamma-container">
-          
-          <!-- gallery begins -->
-          
-          <ul class="gamma-gallery unstyled clearfix">
-
-           
-          </ul>
-          
-          
-          
-          <div class="gamma-overlay"></div>
-          
-          
-          <!-- gallery ends-->
-          
-          
-          
-          </section>
-        </section>
-      </div>
+      <div class="content-fluid" ng-view></div>
       <footer></footer>
     </div>
     <script type="text/javascript" src="lib/modernizr.custom.js"></script>
