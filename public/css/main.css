@@ -221,6 +221,11 @@ nav .logo {
     display: block;
 }
 
+.gamma-gallery li img:hover {
+    box-shadow: 2px 3px 5px rgba(0, 0, 0, 0.3);
+    border: 1px solid inset #fff;
+}
+
 .gamma-description {
     background: #fff;
     background: rgba(255, 255, 255, 0.6);
@@ -238,6 +243,12 @@ nav .logo {
     -ms-transition: opacity 0.4s ease-in-out;
     -o-transition: opacity 0.4s ease-in-out;
     transition: opacity 0.4s ease-in-out;
+    display: none;
+}
+
+.gamma-single-view .gamma-description {
+    display: block;
+    color: #ddd;
 }
 
 .no-touch .gamma-gallery li:hover .gamma-description {
