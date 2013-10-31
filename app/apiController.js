@@ -101,7 +101,8 @@ Controller.prototype = {
         };
 
         apiObj.getTweets(config, function (e, data, apiResp) {
-            resp.set(apiResp.headers);
+            //resp.set(apiResp.headers);
+            resp.type(apiResp.headers['content-type']);
             resp.send(apiResp.statusCode, data);
         });
     }
