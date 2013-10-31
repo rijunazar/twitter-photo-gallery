@@ -1,0 +1,25 @@
+<section class="friendsList-container" ng-controller="friendsList">
+  <ng-include src="templateURL"></ng-include>
+</section>
+<section class="gallery-container">
+  <article class="profile" ng-controller="user" ng-show="user">
+    <div class="media">
+      <a class="pull-left" href="#">
+        <img class="media-object img-circle" width="73px" ng-src="{{user.profile_image_url}}" />
+      </a>
+      <div class="media-body">
+        <h4 class="media-heading">{{user.name}} <a href="#">{{user.screen_name}}</a></h4>
+        <p>{{user.description}}</p>
+      </div>
+    </div>
+  </article>
+  <section class="gallery gamma-container gamma-loading" ng-controller="gallery" id="gamma-container">
+  
+  <!-- gallery begins -->
+  <ul class="gamma-gallery unstyled clearfix" ng-include="templateURL">
+  </ul>
+  <div class="gamma-overlay"></div>
+  <!-- gallery ends-->
+  
+  </section>
+</section>

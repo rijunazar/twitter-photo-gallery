@@ -1,0 +1,9 @@
+<li ng-repeat="tweet in tweets" ng-init="initGallery($last)">
+  <div data-alt="{{tweet.text}}" data-description="<span>{{tweet.text}}</span>" >
+    <div data-src="{{tweet.entities.media[0].media_url}}:large" data-min-width="700"></div>
+    <div data-src="{{tweet.entities.media[0].media_url}}:medium" data-min-width="300"></div>
+    <div data-src="{{tweet.entities.media[0].media_url}}:small" data-min-width="200"></div>
+    <div data-src="{{tweet.entities.media[0].media_url}}:thumb" data-min-width="140"></div>
+    <div data-src="{{tweet.entities.media[0].media_url}}:small"></div>
+  </div>
+</li>
